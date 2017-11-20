@@ -121,6 +121,7 @@ class Filter(object):
         self.bias -= learning_rate * self.bias_grad
 
 
+# 卷积层
 class ConvLayer(object):
     def __init__(self, input_width, input_height,
                  channel_number, filter_width,
@@ -162,9 +163,12 @@ class ConvLayer(object):
                                           self.zero_padding)
         for f in range(self.filter_number):
             filter = self.filters[f]
-            conv(self.padded_input_array,
-                 filter.get_weights(), self.output_array[f],
-                 self.stride, filter.get_bias())
+            conv(
+                self.padded_input_array,
+                filter.get_weights(),
+                self.output_array[f],
+                self.stride,
+                filter.get_bias())
         element_wise_op(self.output_array,
                         self.activator.forward)
 

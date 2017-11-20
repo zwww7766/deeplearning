@@ -98,11 +98,8 @@ class Network(object):
         # self.predict(sample)
         # self.calc_delta(label)
         # self.update_weight(rate)
-        # print '------------>1'
         self.predict(sample)
-        # print '------------>2'
         self.calc_gradient(label)
-        # print '------------>3'
         self.update_weight(rate)
 
     def calc_delta(self, label):
