@@ -2,9 +2,8 @@
 # -*- coding: UTF-8 -*-
 
 
-import random
 import numpy as np
-from activators import SigmoidActivator, IdentityActivator
+from activators import SigmoidActivator
 
 
 # 全连接层实现类

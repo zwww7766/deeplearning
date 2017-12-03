@@ -12,6 +12,7 @@ def get_patch(input_array, i, j, filter_width,
     '''
     从输入数组中获取本次卷积的区域，
     自动适配输入为2D和3D的情况
+    ndim 数组深度
     '''
     start_i = i * stride
     start_j = j * stride

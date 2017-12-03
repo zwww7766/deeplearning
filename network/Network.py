@@ -92,12 +92,6 @@ class Network(object):
     def train_one_sample(self, label, sample, rate):
         label = np.array(label).reshape(len(label), 1)
         sample = np.array(sample).reshape(len(sample), 1)
-        # """
-        # 内部函数，用一个样本训练网络
-        # """
-        # self.predict(sample)
-        # self.calc_delta(label)
-        # self.update_weight(rate)
         self.predict(sample)
         self.calc_gradient(label)
         self.update_weight(rate)
