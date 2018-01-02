@@ -4,6 +4,9 @@ import Loader
 import time
 import numpy as np
 import matplotlib.pyplot as plt
+import socket.config as config
+
+global network
 
 def get_result(vec):
     max_value_index = float(0)
@@ -33,7 +36,13 @@ def evaluate(network, test_data_set, test_labels):
     return float(error) / float(total)
 
 
-def train_and_evaluate():
+def predict_sample(sample):
+    return network.predict(sample)
+
+
+def train_and_evaluate(sample=[]):
+    print '开始训练--->'
+    config['status'] = '神经网络正在训练'
     epoch = 0
     x = []
     y = []
@@ -52,21 +61,27 @@ def train_and_evaluate():
             print '%s after epoch %d, error ratio is %f' % (time.time(), epoch, error_ratio)
             x.append(error_ratio)
             y.append(epoch)
-            print x
-            print y
-            plt.plot(y, x)
-            plt.xlabel('epoch / times')
-            plt.ylabel('error_rate / 1')
-            plt.title('train rate')
-            plt.savefig('./rate.png')
-            # if error_ratio > last_error_ratio:
-
-            if error_ratio < 0.1:
-                print '收敛成功，停止训练'
-                last_error_ratio = error_ratio
+            if error_ratio > last_error_ratio:
+                print '<---训练终止'
+                config['status'] = '神经网络就绪'
                 break
             else:
-                print '一次训练结束'
+                last_error_ratio = error_ratio
+            # print x
+            # print y
+            # plt.plot(y, x)
+            # plt.xlabel('epoch / times')
+            # plt.ylabel('error_rate / 1')
+            # plt.title('train rate')
+            # plt.savefig('./rate.png')
+            # if error_ratio > last_error_ratio:
+
+            # if error_ratio < 0.1:
+            #     print '收敛成功，停止训练'
+            #     last_error_ratio = error_ratio
+            #     break
+            # else:
+            #     print '一次训练结束'
 
 
 

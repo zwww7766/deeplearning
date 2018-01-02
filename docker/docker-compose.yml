@@ -1,0 +1,4 @@
+version: '2'
+services:
+   dpdb:
+     image: deeplearning_bp:latest
