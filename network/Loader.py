@@ -66,7 +66,7 @@ class ImageLoader(Loader):
             for j in range(28):
                 sample.append(picture[i][j])
         # 单个样本节点数784 已计算
-        print sample
+        # print sample
         return sample
 
     def load(self):

@@ -24,20 +24,19 @@ def socketCheck():
 
 def ExecuteClientMsg(v):
     print('---one  msg--->%s', v[1])
-    k, j = v[1].split(':',1)[0]
-    uuid = j[0]
-    data = j[1]
+    k = v[1].split(':',1)[0]
+    data = v[1].split(':',1)[1]
+    uuid = v[0]
     if(k == 'd2q32r2weq23'):
         data = data.split(',')
-        print j
-        print len(j)
-        Msgtoclient(uuid,k+adm.predict_sample(j))
+        Msgtoclient(uuid,k+adm.predict_sample(data))
     elif(k == 'dfdsjjfds'):
-        Msgtoclient(uuid, k + c.config.config['status'])
+        Msgtoclient(uuid, k +":"+ c.config['status'])
 
+
+threading.Thread(target=websocketInit, name='Thread-Websocket').start()
 adm = admin()
 adm.train_and_evaluate()
-threading.Thread(target=websocketInit, name='Thread-Websocket').start()
 time.sleep(0.2)
 socketCheck()
 

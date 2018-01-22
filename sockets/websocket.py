@@ -28,8 +28,8 @@ def Msgtoclient(uuid,message):
 
 def msgGet():
     global msglist
-    msglist = msglist.pop[0]
-    return msglist[0]
+    single = msglist.pop(0)
+    return single
 
 def Getclients():
     global clients
@@ -74,10 +74,11 @@ Sec-WebSocket-Accept: %s\r\n\r\n' % token)
                 break
             data = self.parse_data(data)
             # ----------------------------------------------------------简单的立即通知，不做全异步
+            print '------->------>:'+data
             data = data.split(":", 1)
             clients[data[0]] = self.connection
             msglist.append([data[0],data[1]])
-            print data
+
 
     def parse_data(self, msg):
         v = ord(msg[1]) & 0x7f
