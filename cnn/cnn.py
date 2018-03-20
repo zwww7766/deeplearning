@@ -250,7 +250,7 @@ class ConvLayer(object):
     def expand_sensitivity_map(self, sensitivity_array):
         depth = sensitivity_array.shape[0]
         # 确定扩展后sensitivity map的大小
-        # 计算stride为1时sensitivity map的大小
+        # 计算stride为1时sensitivity map的大小-->步长为1的还原
         expanded_width = (self.input_width -
                           self.filter_width + 2 * self.zero_padding + 1)
         expanded_height = (self.input_height -
@@ -277,7 +277,7 @@ class ConvLayer(object):
         return (input_size - filter_size +
                 2 * zero_padding) / stride + 1
 
-
+# 最大池化层
 class MaxPoolingLayer(object):
     def __init__(self, input_width, input_height,
                  channel_number, filter_width,

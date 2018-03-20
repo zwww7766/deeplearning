@@ -4,6 +4,7 @@ import numpy as np
 class Filter(object):
     def __init__(self, type):
         self.weights = np.random.uniform(-1e-4, 1e-4, type)
+        # print 'filter:',self.weights
         self.bias = 0
         self.weights_grad = np.zeros(
             self.weights.shape)

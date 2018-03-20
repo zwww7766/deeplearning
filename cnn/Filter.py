@@ -2,7 +2,7 @@ import numpy as np
 
 
 class Filter(object):
-    def __init__(self, width, height, depth):
+    def __init__(self, filter):
         self.weights = np.random.uniform(-1e-4, 1e-4, (depth, height, width))
         self.bias = 0
         self.weights_grad = np.zeros(self.weights.shape)

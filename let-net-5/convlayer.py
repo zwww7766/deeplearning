@@ -1,13 +1,19 @@
 # -*- coding: UTF-8 -*-
-import layer
+from layer import Layer
 import numpy as np
 import Filter
-from activators import ReluActivator
+from activators import ReluActivator,IdentityActivator
 from func import *
 
-class ConvLayer(layer):
+
+class ConvLayer(Layer):
     def __init__(self, sizes, filters, c3=[]):
-        layer.__init__(self, sizes)
+        Layer.__init__(self, sizes)
+        if len(c3)>0 :
+            self.c3 = c3
+            self.c3type = True
+        else:
+            self.c3type = False
         self.channel_number = np.shape(self.output_array)[0]
         self.output_height = np.shape(self.output_array)[1]
         self.output_width = np.shape(self.output_array)[2]
@@ -16,13 +22,17 @@ class ConvLayer(layer):
 
         self.filters = []
         self.bias = []
-        self.activator = ReluActivator
+        self.activator = IdentityActivator
+
         for filter in filters:
-            self.filters.append(Filter(filter))
+            self.filters.append(Filter.Filter(filter))
         self.filters = np.array(self.filters)
-        self.filter_number = np.shape(self.filters)[0]
-        self.filter_height = np.shape(self.filters)[1]
-        self.filter_width = np.shape(self.filters)[2]
+        print '-------------- filters shape----------------'
+        # print len(self.filters)
+        # print np.shape(self.filters[0].weights)
+        self.filter_number = np.shape(len(self.filters))
+        self.filter_height = np.shape(self.filters[0].weights)[1]
+        self.filter_width = np.shape(self.filters[0].weights)[2]
         self.zero_padding = 1
         self.stride = 1
 
@@ -37,13 +47,17 @@ class ConvLayer(layer):
         for f in len(self.filters):
             filter = self.filters[f]
             conv(
+                self.padded_input_array[self.c3[f]] if self.c3type else self.padded_input_array,
                 self.padded_input_array,
                 filter.get_weights(),
                 self.maps[f],
                 self.stride,
                 filter.get_bias())
-        element_wise_op(self.maps,
-                        self.activator.forward)
+            element_wise_op(self.maps,
+                            self.activator.forward)
+            # c3层卷积结果
+        else:
+            pass
 
     def backward(self, input_array, sensitivity_array,
                  activator):
@@ -88,8 +102,11 @@ class ConvLayer(layer):
                 filter.get_weights()))
             # 计算与一个filter对应的delta_array
             delta_array = self.create_delta_array()
+            cur = f
+            if self.c3type:
+                cur = self.c3[f]
             for d in range(delta_array.shape[0]):
-                conv(padded_array[f], flipped_weights[d],
+                conv(padded_array[cur], flipped_weights[d],
                      delta_array[d], 1, 0)
             self.delta_array += delta_array
         # 将计算结果与激活函数的偏导数做element-wise乘法操作

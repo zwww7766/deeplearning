@@ -67,7 +67,7 @@ class ImageLoader(Loader):
                 c +=str(j)
         # n = np.array(picture)
         # print  n
-        # img = Image.fromarray(n)
+        img = Image.fromarray(n)
         file_name = '../traindata/pic/'+index+'.png'
         img.save(file_name)
         sample = []

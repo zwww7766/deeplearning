@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 import numpy as np
 
 
@@ -52,6 +53,15 @@ def get_patch(input_array, i, j, filter_width,
                start_i: start_i + filter_height,
                start_j: start_j + filter_width]
 
+# 获取平均值
+def get_average(array):
+    a = 0
+    b = 0
+    for i in range(array.shape[0]):
+        for j in range(array.shape[1]):
+            a = a + 1
+            b = b + array[i, j]
+    return b/a
 
 # 为数组增加Zero padding
 def padding(input_array, zp):

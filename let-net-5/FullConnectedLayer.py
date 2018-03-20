@@ -1,10 +1,10 @@
 # coding=utf-8
 # 全连接层实现类
 import  numpy as np
-
+from activators import SigmoidActivator
 
 class FullConnectedLayer(object):
-        def __init__(self, input_size, output_size, activator):
+        def __init__(self, output_size, input_size):
             """
             构造函数
         input_size: 本层输入向量的维度
@@ -13,7 +13,7 @@ class FullConnectedLayer(object):
             """
             self.input_size = input_size
             self.output_size = output_size
-            self.activator = activator
+            self.activator = SigmoidActivator
             # 权重数组W
             self.W = np.random.uniform(-0.5, 0.5,
                                        (output_size, input_size))
