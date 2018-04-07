@@ -68,6 +68,8 @@ def padding(input_array, zp):
     '''
     为数组增加Zero padding，自动适配输入为2D和3D的情况
     '''
+
+    #ndim 为矩阵的维度
     if zp == 0:
         return input_array
     else:
@@ -91,9 +93,15 @@ def padding(input_array, zp):
                 input_width + 2 * zp))
             padded_array[zp: zp + input_height,
             zp: zp + input_width] = input_array
+            print '--- padded array ---'
+            print np.shape(padded_array)
             return padded_array
 # 对numpy数组进行element wise操作
 def element_wise_op(array, op):
+    # nditer 迭代数组
+    print '--- element_wise_op ---'
+    print np.shape(array)
+    # numpy.nditer 迭代器，从矩阵中一个一个的选取元素
     for i in np.nditer(array,
                        op_flags=['readwrite']):
-        i[...] = op(i)
+        i[...] = op(i)#op(i)的操作付值给了 i 所在数组位置的对应的值 

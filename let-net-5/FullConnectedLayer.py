@@ -13,7 +13,7 @@ class FullConnectedLayer(object):
             """
             self.input_size = input_size
             self.output_size = output_size
-            self.activator = SigmoidActivator
+            self.activator = SigmoidActivator()
             # 权重数组W
             self.W = np.random.uniform(-0.5, 0.5,
                                        (output_size, input_size))
@@ -28,25 +28,42 @@ class FullConnectedLayer(object):
             """
             # 式2
             # print np.shape(self.W)
-            # print np.shape(self.b)
-            self.input = input_array
-            self.output = self.activator.forward(
-                np.dot(self.W, input_array) + self.b)
+            print '------------------------ fclayer forward---'
+            # print input_array
+            a = []
+            if input_array.ndim==3:
+                for i in input_array:
+                    a.append(i[0][0])
+                input_array = a
+            self.input_array = sample = np.array(input_array).reshape(len(input_array), 1)
 
-            # print np.shape(self.output)
+            print np.shape(self.input_array)
+            print np.shape(self.W)
+            print np.shape(self.b)
+            self.output_array = self.activator.forward(
+                np.dot(self.W, self.input_array) + self.b)
+
+            print '-----fclayer output : '
+            print np.shape(self.output_array)
             # print '---------->out'
 
-        def backward(self, delta_array):
+        def backward(self, input_array, delta_array, learn_rate):
             """反向计算W和b的梯度
             delta_array: 从上一层传递过来的误差项
             """
             # 式8
-            self.delta = self.activator.backward(self.input) * np.dot(
+            print '- fcbk -'
+            print 'input:',np.shape(self.input_array)
+            print 'delta_array:',np.shape(delta_array)
+            print 'W:',np.shape(self.W)
+
+            self.delta_array = self.activator.backward(self.input_array) * np.dot(
 
             self.W.T, delta_array)
-
-            self.W_grad = np.dot(delta_array, self.input.T)
-
+            print '-- fc delta --'
+            print np.shape(self.delta_array)
+            self.W_grad = np.dot(delta_array, self.input_array.T)
+            print np.shape(self.W_grad)
             self.b_grad = delta_array
 
 

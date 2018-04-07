@@ -2,7 +2,6 @@
 # 全连接层实现类
 import  numpy as np
 
-
 class FullConnectedLayer(object):
         def __init__(self, input_size, output_size, activator):
             """

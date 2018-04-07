@@ -5,6 +5,7 @@ import struct
 from datetime import datetime
 # 数据加载器基类
 import  numpy as np
+from func import *
 
 class Loader(object):
     def __init__(self, path, count):
@@ -55,8 +56,6 @@ class ImageLoader(Loader):
                 picture[i].append(
                     # 按行i  j值逐步取单个字节
                     self.to_int(content[start + i * 28 + j]))
-        print picture
-        print '------'
         return picture
 
     def get_one_sample(self, picture):
@@ -78,8 +77,10 @@ class ImageLoader(Loader):
         data_set = []
         for index in range(self.count):
             data_set.append(
-                self.get_one_sample(
-                    self.get_picture(content, index)))
+                # self.get_one_sample(
+                # 外padding两层，用来帮助收集图像边缘特征
+                    padding(np.array(self.get_picture(content, index)), 2))
+            # )
         return data_set
 # 标签数据加载器
 

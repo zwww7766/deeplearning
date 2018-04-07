@@ -12,7 +12,6 @@ class ConvNetwork(object):
 
         convlayer3choose_array = [[0,1,2],[1,2,3],[2,3,4],[3,4,5],[4,5,0],[5,0,1],\
                 [0,1,2,3],[1,2,3,4],[2,3,4,5],[3,4,5,0],[4,5,0,1],[5,0,1,2],[0,1,3,4],[1,2,4,5],[0,2,3,5],[0,1,2,3,4,5]]
-        print("-------step1")
         self.convlayer1 = ConvLayer([[28, 28]] * 6, [[1, 5, 5]] * 6)
         self.poolinglayer2 = meanPoolingLayer([[14, 14]] * 6, [[2, 2]] * 6)
 
@@ -21,12 +20,11 @@ class ConvNetwork(object):
 
         self.convlayer5 = ConvLayer([[1, 1]] * 120, [[16, 5, 5]] * 120)
         self.fclayer6 = FullConnectedLayer(84, 120)
-
+        # self.convlayer6 = ConvLayer([[1, 1]] * 84, [[1, 1]] * 84)
         self.outputlayer7 = FullConnectedLayer(10, 84)
-
+        # self.convlayer7 = ConvLayer([[1, 1]] * 10, [[1, 1]] * 10)
         self.layers = [self.convlayer1, self.poolinglayer2,\
                        self.convlayer3, self.poolinglayer4, self.convlayer5, self.fclayer6, self.outputlayer7]
-
     def forward(self, sample):
         output = sample
 
@@ -36,13 +34,28 @@ class ConvNetwork(object):
         return output
 
     def backword(self, sample, label, learn_rate):
-        output_label = np.zeros([1, 1, 10])
-        output_label[0][0][label] = 1
+
+        # output_label = np.zeros([1, 1, 10])
+        # print output_label[0][0]
+        label = np.array(label).reshape(len(label), 1)#10,1 与 偏差项统一
+        # np.where 三元操作符
+        # output_label[0][0][np.where(label>=np.max(label))[0][0]] = 1
+        # 取得是 输出的 最大值的index
         output = sample
-        for layer in self.layers:
+        # 最外层的fc层的delta由label 和 output确定
+        output_label = self.layers[-1].activator.backward(
+            self.layers[-1].output_array
+        ) * (label - self.layers[-1].output_array)
+        print np.shape(self.layers[-1].output_array)
+        for layer in self.layers[::-1]:
+            # output_label 为误差项 &^l
+            print '------------------------------- backword once ---------------------------'
+            print ' 上一层的layer偏差项：', np.shape(output_label)
             layer.backward(output, output_label, learn_rate)
-            output_label = layer.delta
+            output_label = layer.delta_array
             output = layer.output_array
+            print ' layer偏差项：', np.shape(layer.delta_array)
+            print '  input ',np.shape(layer.input_array)
 
     def train(self, labels, data_set, rate, epoch):
         """     训练函数
@@ -60,4 +73,7 @@ class ConvNetwork(object):
         print '----- foward labels -----'
         self.forward(sample)
         print '----- backward labels -----'
-        self.backword(sample, label, 0.1)
+        # 32 x 32
+        print np.shape(sample)
+        print label
+        self.backword(sample, label, rate)
