@@ -99,8 +99,6 @@ def padding(input_array, zp):
 # 对numpy数组进行element wise操作
 def element_wise_op(array, op):
     # nditer 迭代数组
-    print '--- element_wise_op ---'
-    print np.shape(array)
     # numpy.nditer 迭代器，从矩阵中一个一个的选取元素
     for i in np.nditer(array,
                        op_flags=['readwrite']):

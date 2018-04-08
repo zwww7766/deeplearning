@@ -7,6 +7,5 @@ class Layer(object):
         self.sizes = sizes
         self.output_array = []
         for mapsize in sizes:
-            print '尺寸:',mapsize
             self.output_array.append(np.zeros(mapsize))
         self.output_array = np.array(self.output_array)

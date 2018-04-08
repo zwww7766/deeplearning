@@ -24,13 +24,11 @@ class ConvLayer(Layer):
         self.filters = []
         self.bias = []
         self.activator = IdentityActivator()
-        print '初级对比：', np.shape(filters[0])
 
         for filter in filters:
             self.filters.append(Filter.Filter(filter))
         self.filters = np.array(self.filters)
         self.channel_number = self.get_channel_number()
-        print '-------------- filters shape----------------'
         self.filter_number = len(self.filters)
         self.filter_height = np.shape(self.filters[0].weights)[1]
         self.filter_width = np.shape(self.filters[0].weights)[2]
@@ -75,7 +73,6 @@ class ConvLayer(Layer):
         """
         # self.forward(input_array)
         print '-------------start convlayer backward ---'
-        print 'c3 warning!:', self.c3type
         self.bp_sensitivity_map(sensitivity_array,
                                 self.activator)
         self.bp_gradient(sensitivity_array)
@@ -103,9 +100,6 @@ class ConvLayer(Layer):
         # 对于具有多个filter的卷积层来说，最终传递到上一层的
         # sensitivity map相当于所有的filter的
         # sensitivity map之和
-        print '----- filter number ----:',self.filter_number
-        print 'zp:',zp
-        print 'padded_array:',np.shape(padded_array)
         for f in range(self.filter_number):
             filter = self.filters[f]
             # 将filter权重翻转180度
@@ -139,18 +133,12 @@ class ConvLayer(Layer):
 
     def bp_gradient(self, sensitivity_array):
         # 处理卷积步长，对原始sensitivity map进行扩展
-        print '-------------------------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>bpgradient'
         expanded_array = self.expand_sensitivity_map(
             sensitivity_array)
-        print '------------>>>>>>>>---------------expanded_array:',np.shape(expanded_array)
         for f in range(self.filter_number):
             # 计算每个权重的梯度
             filter = self.filters[f]
-            print 'now filter range:',np.shape(filter.weights)
             for d in range(filter.weights.shape[0]):
-                print 'conv卷积：',np.shape(self.padded_input_array[d])
-                print '卷积内容：', np.shape(expanded_array[f])
-                print '梯度更新内容:',np.shape(filter.weights_grad[d])
                 conv(self.padded_input_array[d],
                      expanded_array[f],
                      filter.weights_grad[d], 1, 0)
@@ -167,20 +155,8 @@ class ConvLayer(Layer):
         expanded_height = (self.input_height -
                            self.filter_height + 2 * self.zero_padding + 1)
         # 构建新的sensitivity_map
-        print 'input height:',self.input_height
-        print 'input width:',self.input_width
-        print 'filter: ',self.filter_width
-        print 'zeropad: ',self.zero_padding
-        print '- expand -'
-        print depth
-        print expanded_height
-        print expanded_width
-        print '-----'
-        print 'sensitivity_array:',np.shape(sensitivity_array)
         expand_array = np.zeros((depth, expanded_height,
                                  expanded_width))
-        print 'expand_array:',np.shape(expand_array)
-        print 'output:',np.shape(self.output_array)
         # 从原始sensitivity map拷贝误差值8
         for i in range(self.output_height):
             for j in range(self.output_width):
@@ -199,7 +175,6 @@ class ConvLayer(Layer):
         for f in self.filters:
             if np.shape(f.get_weights())[0]>=vmax:
                 vmax = np.shape(f.get_weights())[0]
-                print 'channel_number 对比：', np.shape(f.get_weights())
         return vmax
     def deltaCalculate(self, delta):
         # 对c3 层做的特殊处理，由于 偏差项 为6，14，14 而卷集合的尺寸 有 （3，14，14）（4，14，14）（6，14，14）
