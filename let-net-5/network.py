@@ -49,13 +49,9 @@ class ConvNetwork(object):
         print np.shape(self.layers[-1].output_array)
         for layer in self.layers[::-1]:
             # output_label 为误差项 &^l
-            print '------------------------------- backword once ---------------------------'
-            print ' 上一层的layer偏差项：', np.shape(output_label)
             layer.backward(output, output_label, learn_rate)
             output_label = layer.delta_array
             output = layer.output_array
-            print ' layer偏差项：', np.shape(layer.delta_array)
-            print '  input ',np.shape(layer.input_array)
 
     def train(self, labels, data_set, rate, epoch):
         """     训练函数
@@ -70,10 +66,6 @@ class ConvNetwork(object):
                                       data_set[d], rate)
 
     def train_one_sample(self, label, sample, rate):
-        print '----- foward labels -----'
         self.forward(sample)
-        print '----- backward labels -----'
         # 32 x 32
-        print np.shape(sample)
-        print label
         self.backword(sample, label, rate)
