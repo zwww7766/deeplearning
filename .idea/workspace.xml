@@ -3,15 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="603c619a-fd02-42f6-a675-7373c78502ad" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/let-net-5/Filter.py" afterPath="$PROJECT_DIR$/let-net-5/Filter.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/let-net-5/FullConnectedLayer.py" afterPath="$PROJECT_DIR$/let-net-5/FullConnectedLayer.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/let-net-5/Loader.py" afterPath="$PROJECT_DIR$/let-net-5/Loader.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/let-net-5/convlayer.py" afterPath="$PROJECT_DIR$/let-net-5/convlayer.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/let-net-5/func.py" afterPath="$PROJECT_DIR$/let-net-5/func.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/let-net-5/layer.py" afterPath="$PROJECT_DIR$/let-net-5/layer.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/let-net-5/meanPooling.py" afterPath="$PROJECT_DIR$/let-net-5/meanPooling.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/let-net-5/network.py" afterPath="$PROJECT_DIR$/let-net-5/network.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/network/FullConnectedLayer.py" afterPath="$PROJECT_DIR$/network/FullConnectedLayer.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -39,8 +31,8 @@
       <file leaf-file-name="cnn.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/cnn/cnn.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="574">
-              <caret line="234" column="0" lean-forward="true" selection-start-line="234" selection-start-column="0" selection-end-line="234" selection-end-column="0" />
+            <state relative-caret-position="255">
+              <caret line="18" column="19" lean-forward="false" selection-start-line="18" selection-start-column="19" selection-end-line="18" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -49,8 +41,28 @@
       <file leaf-file-name="convlayer.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/let-net-5/convlayer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="117" column="38" lean-forward="false" selection-start-line="117" selection-start-column="38" selection-end-line="117" selection-end-column="38" />
+            <state relative-caret-position="516">
+              <caret line="49" column="60" lean-forward="false" selection-start-line="49" selection-start-column="60" selection-end-line="49" selection-end-column="60" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Filter.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/let-net-5/Filter.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="75">
+              <caret line="5" column="59" lean-forward="false" selection-start-line="5" selection-start-column="59" selection-end-line="5" selection-end-column="59" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="func.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/let-net-5/func.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="285">
+              <caret line="19" column="18" lean-forward="true" selection-start-line="19" selection-start-column="18" selection-end-line="19" selection-end-column="18" />
               <folding />
             </state>
           </provider>
@@ -59,7 +71,7 @@
       <file leaf-file-name="FullConnectedLayer.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/let-net-5/FullConnectedLayer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="373">
+            <state relative-caret-position="930">
               <caret line="63" column="43" lean-forward="false" selection-start-line="63" selection-start-column="43" selection-end-line="63" selection-end-column="43" />
               <folding />
             </state>
@@ -89,8 +101,8 @@
       <file leaf-file-name="network.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/let-net-5/network.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="17" column="80" lean-forward="false" selection-start-line="17" selection-start-column="80" selection-end-line="17" selection-end-column="80" />
+            <state relative-caret-position="420">
+              <caret line="31" column="21" lean-forward="false" selection-start-line="31" selection-start-column="21" selection-end-line="31" selection-end-column="21" />
               <folding>
                 <element signature="e#24#47#0" expanded="true" />
               </folding>
@@ -101,7 +113,7 @@
       <file leaf-file-name="meanPooling.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/let-net-5/meanPooling.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="250">
+            <state relative-caret-position="525">
               <caret line="38" column="59" lean-forward="true" selection-start-line="38" selection-start-column="59" selection-end-line="38" selection-end-column="59" />
               <folding />
             </state>
@@ -119,8 +131,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>self.stride</find>
-      <find>zp</find>
       <find>padded_array</find>
       <find>backward</find>
       <find>weights_grad =</find>
@@ -137,18 +147,20 @@
       <find>element_wise_op</find>
       <find>console</find>
       <find>filter_width</find>
-      <find>bp_gradient</find>
       <find>input_</find>
       <find>input_width</find>
-      <find>expand_sensitivity_map</find>
       <find>self.input_width</find>
       <find>activator</find>
       <find>np.z</find>
-      <find>ndim</find>
       <find>channel_number</find>
       <find>self.channel_number</find>
-      <find>create_delta_array</find>
       <find>self.delta</find>
+      <find>create_delta_array</find>
+      <find>bp_gradient</find>
+      <find>expand_sensitivity_map</find>
+      <find>reshape</find>
+      <find>padded_input_array</find>
+      <find>ndim</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -298,18 +310,19 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1" y="23" width="1440" height="797" extended-state="6" />
+    <frame x="0" y="23" width="1440" height="797" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.37195995" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32816902" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32863188" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24964234" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36324787" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.37195995" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24964234" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -318,7 +331,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -403,9 +415,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="645">
           <caret line="47" column="59" lean-forward="false" selection-start-line="47" selection-start-column="59" selection-end-line="47" selection-end-column="59" />
-          <folding>
-            <element signature="e#24#38#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -469,9 +479,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="23" />
-          <folding>
-            <element signature="e#24#38#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -600,7 +608,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1242">
           <caret line="110" column="18" lean-forward="false" selection-start-line="110" selection-start-column="18" selection-end-line="110" selection-end-column="18" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -611,19 +618,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/let-net-5/func.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1575">
-          <caret line="105" column="47" lean-forward="true" selection-start-line="105" selection-start-column="47" selection-end-line="105" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/network/Loader.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1200">
           <caret line="84" column="0" lean-forward="true" selection-start-line="84" selection-start-column="0" selection-end-line="84" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -631,7 +629,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -639,7 +636,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="645">
           <caret line="47" column="20" lean-forward="false" selection-start-line="47" selection-start-column="20" selection-end-line="47" selection-end-column="20" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -655,7 +651,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="247">
           <caret line="42" column="57" lean-forward="false" selection-start-line="42" selection-start-column="57" selection-end-line="42" selection-end-column="57" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -671,6 +666,21 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="965">
           <caret line="93" column="57" lean-forward="false" selection-start-line="93" selection-start-column="8" selection-end-line="93" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/let-net-5/meanPooling.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="525">
+          <caret line="38" column="59" lean-forward="true" selection-start-line="38" selection-start-column="59" selection-end-line="38" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/let-net-5/FullConnectedLayer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="930">
+          <caret line="63" column="43" lean-forward="false" selection-start-line="63" selection-start-column="43" selection-end-line="63" selection-end-column="43" />
           <folding />
         </state>
       </provider>
@@ -683,18 +693,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/let-net-5/meanPooling.py">
+    <entry file="file://$PROJECT_DIR$/let-net-5/func.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="38" column="59" lean-forward="true" selection-start-line="38" selection-start-column="59" selection-end-line="38" selection-end-column="59" />
+        <state relative-caret-position="285">
+          <caret line="19" column="18" lean-forward="true" selection-start-line="19" selection-start-column="18" selection-end-line="19" selection-end-column="18" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/let-net-5/network.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="80" lean-forward="false" selection-start-line="17" selection-start-column="80" selection-end-line="17" selection-end-column="80" />
+        <state relative-caret-position="420">
+          <caret line="31" column="21" lean-forward="false" selection-start-line="31" selection-start-column="21" selection-end-line="31" selection-end-column="21" />
           <folding>
             <element signature="e#24#47#0" expanded="true" />
           </folding>
@@ -703,24 +713,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/cnn/cnn.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="574">
-          <caret line="234" column="0" lean-forward="true" selection-start-line="234" selection-start-column="0" selection-end-line="234" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/let-net-5/FullConnectedLayer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="373">
-          <caret line="63" column="43" lean-forward="false" selection-start-line="63" selection-start-column="43" selection-end-line="63" selection-end-column="43" />
+        <state relative-caret-position="255">
+          <caret line="18" column="19" lean-forward="false" selection-start-line="18" selection-start-column="19" selection-end-line="18" selection-end-column="19" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/let-net-5/convlayer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="117" column="38" lean-forward="false" selection-start-line="117" selection-start-column="38" selection-end-line="117" selection-end-column="38" />
+        <state relative-caret-position="516">
+          <caret line="49" column="60" lean-forward="false" selection-start-line="49" selection-start-column="60" selection-end-line="49" selection-end-column="60" />
           <folding />
         </state>
       </provider>

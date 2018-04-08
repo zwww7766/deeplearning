@@ -15,7 +15,6 @@ class ConvLayer(Layer):
         else:
             self.c3type = False
 
-        self.channel_number = filters[0][0]
         # channel_number 是 每个人filter的深度 而不是 filter的数量
         self.output_height = np.shape(self.output_array)[1]
         self.output_width = np.shape(self.output_array)[2]
@@ -25,10 +24,12 @@ class ConvLayer(Layer):
         self.filters = []
         self.bias = []
         self.activator = IdentityActivator()
+        print '初级对比：', np.shape(filters[0])
 
         for filter in filters:
             self.filters.append(Filter.Filter(filter))
         self.filters = np.array(self.filters)
+        self.channel_number = self.get_channel_number()
         print '-------------- filters shape----------------'
         self.filter_number = len(self.filters)
         self.filter_height = np.shape(self.filters[0].weights)[1]
@@ -42,10 +43,13 @@ class ConvLayer(Layer):
         输出结果保存在self.output_array
         """
         self.input_array = input_array
-        self.padded_input_array = padding(input_array,
+        if self.input_array.ndim == 2:
+            self.input_array = self.input_array.reshape((1,np.shape(self.input_array)[0],np.shape(self.input_array)[1]))
+
+        self.padded_input_array = padding(self.input_array,
                                           self.zero_padding)
-        self.input_width = len(self.input_array[2])
-        self.input_height = len(self.input_array[1])
+        self.input_width = np.shape(self.input_array)[2]
+        self.input_height = np.shape(self.input_array)[1]
         print '-------------start convlayer forward---'
         print np.shape(input_array)
         for f in range(len(self.filters)):
@@ -113,35 +117,40 @@ class ConvLayer(Layer):
             delta_array = self.create_delta_array(np.shape(flipped_weights)[0] if self.c3type else 0)
             cur = f
             if self.c3type:
-                cur = self.c3[f]
-                print '------ c3 特殊 ------'
-                print '被卷积的 &(误差项) 部分：',np.shape(padded_array[cur])
-                print np.shape(flipped_weights)
-                print '匹配的delta 深度: ',np.shape(flipped_weights)[0]
-                print 'delta_array:',np.shape(delta_array)
+                pass
+                # cur = self.c3[f]
+                # print '------ c3 特殊 ------'
+                # print '被卷积的 &(误差项) 部分：',np.shape(padded_array[cur])
+                # print np.shape(flipped_weights)
+                # print '匹配的delta 深度: ',np.shape(flipped_weights)[0]
+                # print 'delta_array:',np.shape(delta_array)
             for d in range(delta_array.shape[0]):
                 # 从 0 开始到 filter 的个数次
                 # 将 此filter 每一层卷积 第 f 个 sensitivity_array
                 # 最后求和
                 conv(padded_array[cur], flipped_weights[d],
                      delta_array[d], 1, 0)
-
-            self.delta_array += delta_array
+            # self.delta_array += delta_array
+            self.deltaCalculate(delta_array)
         # 将计算结果与激活函数的偏导数做element-wise乘法操作
         derivative_array = np.array(self.input_array)
         element_wise_op(derivative_array, activator.backward)
-        print '>>derivative_array',np.shape(derivative_array)
-        print '>>dltaarry',np.shape(self.delta_array)
         self.delta_array *= derivative_array
 
     def bp_gradient(self, sensitivity_array):
         # 处理卷积步长，对原始sensitivity map进行扩展
+        print '-------------------------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>bpgradient'
         expanded_array = self.expand_sensitivity_map(
             sensitivity_array)
+        print '------------>>>>>>>>---------------expanded_array:',np.shape(expanded_array)
         for f in range(self.filter_number):
             # 计算每个权重的梯度
             filter = self.filters[f]
+            print 'now filter range:',np.shape(filter.weights)
             for d in range(filter.weights.shape[0]):
+                print 'conv卷积：',np.shape(self.padded_input_array[d])
+                print '卷积内容：', np.shape(expanded_array[f])
+                print '梯度更新内容:',np.shape(filter.weights_grad[d])
                 conv(self.padded_input_array[d],
                      expanded_array[f],
                      filter.weights_grad[d], 1, 0)
@@ -185,3 +194,14 @@ class ConvLayer(Layer):
         if num == 0:
             num = self.channel_number
         return np.zeros((num, self.input_height, self.input_width))
+    def get_channel_number(self):
+        vmax = 0
+        for f in self.filters:
+            if np.shape(f.get_weights())[0]>=vmax:
+                vmax = np.shape(f.get_weights())[0]
+                print 'channel_number 对比：', np.shape(f.get_weights())
+        return vmax
+    def deltaCalculate(self, delta):
+        # 对c3 层做的特殊处理，由于 偏差项 为6，14，14 而卷集合的尺寸 有 （3，14，14）（4，14，14）（6，14，14）
+        # 由于尺寸不同不能直接相加 我将 偏差项的 相应部分相加， 达到目标
+        self.delta_array[:np.shape(delta)[0]] +=delta
