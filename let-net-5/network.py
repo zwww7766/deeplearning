@@ -46,7 +46,6 @@ class ConvNetwork(object):
         output_label = self.layers[-1].activator.backward(
             self.layers[-1].output_array
         ) * (label - self.layers[-1].output_array)
-        print np.shape(self.layers[-1].output_array)
         for layer in self.layers[::-1]:
             # output_label 为误差项 &^l
             layer.backward(output, output_label, learn_rate)
@@ -69,3 +68,4 @@ class ConvNetwork(object):
         self.forward(sample)
         # 32 x 32
         self.backword(sample, label, rate)
+        print '---- tran one sample ----'

@@ -5,17 +5,16 @@ import numpy as np
 from PIL import Image
 
 def train_and_evaluate():
-    print '-------step0'
+    print '-------step 0-------'
     epoch = 0
     train_data_set, train_labels = Loader.get_training_data_set()
     test_data_set, test_labels = Loader.get_test_data_set()
-    print '-------step1'
+    print '-------step 1-------'
     net = network.ConvNetwork()
-    print '-------step2'
+    print '-------step 2-------'
 
     epoch +=1
-    print len(train_data_set)
-    print len(train_labels)
+    print '训练数据量: %s labels: %s'%(len(train_data_set),len(train_labels))
     net.train(train_labels, train_data_set, 0.1, 1)
 
 if __name__ == '__main__':

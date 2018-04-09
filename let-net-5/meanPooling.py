@@ -18,7 +18,6 @@ class meanPoolingLayer(Layer):
         for filter in filters:
             self.filters.append(Filter.Filter(filter))
         self.filters = np.array(self.filters)
-        print '-------------- mean filters shape----------------'
         # print len(self.filters)
         # print np.shape(self.filters[0].weights)
         self.filter_number = np.shape(len(self.filters))

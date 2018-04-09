@@ -37,8 +37,6 @@ class FullConnectedLayer(object):
             self.input_array = sample = np.array(input_array).reshape(len(input_array), 1)
             self.output_array = self.activator.forward(
                 np.dot(self.W, self.input_array) + self.b)
-
-            print np.shape(self.output_array)
             # print '---------->out'
 
         def backward(self, input_array, delta_array, learn_rate):

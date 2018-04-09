@@ -48,8 +48,6 @@ class ConvLayer(Layer):
                                           self.zero_padding)
         self.input_width = np.shape(self.input_array)[2]
         self.input_height = np.shape(self.input_array)[1]
-        print '-------------start convlayer forward---'
-        print np.shape(input_array)
         for f in range(len(self.filters)):
             filter = self.filters[f]
             conv(
@@ -72,7 +70,6 @@ class ConvLayer(Layer):
         梯度保存在Filter对象的weights_grad
         """
         # self.forward(input_array)
-        print '-------------start convlayer backward ---'
         self.bp_sensitivity_map(sensitivity_array,
                                 self.activator)
         self.bp_gradient(sensitivity_array)

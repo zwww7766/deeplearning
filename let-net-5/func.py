@@ -93,8 +93,6 @@ def padding(input_array, zp):
                 input_width + 2 * zp))
             padded_array[zp: zp + input_height,
             zp: zp + input_width] = input_array
-            print '--- padded array ---'
-            print np.shape(padded_array)
             return padded_array
 # 对numpy数组进行element wise操作
 def element_wise_op(array, op):
