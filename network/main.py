@@ -46,6 +46,7 @@ def train_and_evaluate():
         # print 'train once------->train_data : %d 个，labels : %d 个' % (len(train_data_set), len(test_labels))
 
         network.train(train_labels, train_data_set, 0.1, 1)
+        network.train(train_labels, train_data_set, 0.1, 1)
         print '%s epoch %d finished' % (time.time(), epoch)
         if epoch % 10 == 0:
             error_ratio = evaluate(network, test_data_set, test_labels)

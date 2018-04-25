@@ -115,8 +115,8 @@ def get_training_data_set():
     """
     获得训练数据集
     """
-    image_loader = ImageLoader('../traindata/train-images-idx3-ubyte', 100)
-    label_loader = LabelLoader('../traindata/train-labels-idx1-ubyte', 100)
+    image_loader = ImageLoader('./deeplearning/traindata/train-images-idx3-ubyte', 100)
+    label_loader = LabelLoader('./deeplearning/traindata/train-labels-idx1-ubyte', 100)
     # image_loader = ImageLoader('./MyMachineLearning/traindata/train-images-idx3-ubyte', 60000)
     # label_loader = LabelLoader('./MyMachineLearning/traindata/train-labels-idx1-ubyte', 60000)
     return image_loader.load(), label_loader.load()
@@ -127,8 +127,8 @@ def get_test_data_set():
     """
     获得测试数据集
     """
-    image_loader = ImageLoader('../traindata/t10k-images-idx3-ubyte', 100)
-    label_loader = LabelLoader('../traindata/t10k-labels-idx1-ubyte', 100)
+    image_loader = ImageLoader('./deeplearning/traindata/t10k-images-idx3-ubyte', 100)
+    label_loader = LabelLoader('./deeplearning/traindata/t10k-labels-idx1-ubyte', 100)
     # image_loader = ImageLoader('./MyMachineLearning/traindata/t10k-images-idx3-ubyte', 10000)
     # label_loader = LabelLoader('./MyMachineLearning/traindata/t10k-labels-idx1-ubyte', 10000)
     return image_loader.load(), label_loader.load()
