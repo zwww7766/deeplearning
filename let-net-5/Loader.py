@@ -1,11 +1,13 @@
 #!/usr/bin/env python
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 import struct
+from PIL import Image
 # from bp import *
 from datetime import datetime
 # 数据加载器基类
 import  numpy as np
 from func import *
+import os
 
 class Loader(object):
     def __init__(self, path, count):
@@ -104,9 +106,9 @@ class LabelLoader(Loader):
         label_value = self.to_int(label)
         for i in range(10):
             if i == label_value:
-                label_vec.append(0.9)
+                label_vec.append(1)
             else:
-                label_vec.append(0.1)
+                label_vec.append(0)
         #转为(10,)
         return label_vec
 
@@ -132,3 +134,13 @@ def get_test_data_set():
     # image_loader = ImageLoader('./MyMachineLearning/traindata/t10k-images-idx3-ubyte', 10000)
     # label_loader = LabelLoader('./MyMachineLearning/traindata/t10k-labels-idx1-ubyte', 10000)
     return image_loader.load(), label_loader.load()
+
+if __name__ == '__main__':
+    testImgs , testLabel = get_test_data_set()
+    print  len(testImgs)
+    for i in range(len(testImgs)):
+        img = Image.fromarray(np.array(testImgs[i], dtype='Int32'))
+        val =testLabel[i].index(max(testLabel[i]))
+        file_name = './deeplearning/traindata/pics/image%s.png' % i
+        # img.show()
+        img.convert('L').save(file_name)

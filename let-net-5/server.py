@@ -1,4 +1,4 @@
-# -*- coding:utf8 -*-
+# -*- coding: utf-8 -*-
 import threading
 import time
 
@@ -17,7 +17,7 @@ def websocketInit():
 
 
 def socketCheck():
-    print 'socket check'
+    print '-----socket check------'
     while True:
         if len(Getmsglist()) > 0:
             ExecuteClientMsg(msgGet())
@@ -25,22 +25,25 @@ def socketCheck():
 
 
 def ExecuteClientMsg(v):
-    print('---one  msg--->%s', v[1])
+    print('---one  msg--->%s')
     k = v[1].split(':',1)[0]
     data = v[1].split(':',1)[1]
     uuid = v[0]
-    print k
-    print data
     if(k == 'd2q32r2weq23'):
-        data = data.split(',')
-        # Msgtoclient(uuid,k+main.tran_once(data))
+        result = main.tran_once(int(data))
+        arr =[]
+        for i in range(len(result)):
+            arr.append(result[i][0])
+
+        print arr
+        Msgtoclient(uuid,k+':'+str(arr.index(max(arr))))
     elif(k == 'dfdsjjfds'):
         Msgtoclient(uuid, k +":"+ c.config['status'])
 
 
-threading.Thread(target=websocketInit, name='Thread-Websocket').start()
+# threading.Thread(target=websocketInit, name='Thread-Websocket').start()
 main.train_and_evaluate()
 time.sleep(0.2)
-socketCheck()
+# socketCheck()
 
     

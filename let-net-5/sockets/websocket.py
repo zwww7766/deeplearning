@@ -1,4 +1,4 @@
-# -*- coding:utf8 -*-
+# -*- coding: utf-8 -*-
 
 import threading
 import hashlib
@@ -74,14 +74,9 @@ Sec-WebSocket-Accept: %s\r\n\r\n' % token)
                 break
             data = self.parse_data(data)
             # ----------------------------------------------------------简单的立即通知，不做全异步
-            print '------->------>:'+data
             data = data.split(":", 1)
             clients[data[0]] = self.connection
             msglist.append([data[0],data[1]])
-
-            # d2q32r2weq23:data:image / octet - stream;
-            # base64, iVBORw0KGgoAAAANSUhEUgAAAMgAAAEsCAYAAACG + vy + AAAAAXNSR0IArs4c6QAADiZJREFUeAHt3cvLLEcZx / FjNILk4E7 / APGPcOHioK684t8hqBGUgBCNQnAl7sSN / 4
-            # VLNSsvG3EnJDtBEDVCMMdLvNYvxz6Z6enueZ7qute3YXjf6anurvo89XRV98w774MHLAgggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCBQUOCH4Vj / CY // bjy0 / rnwYEFgSoG9xFgnC0lyonu868S2bFpH4K1w2Gcdh1bCPOMoT9ELARLkAqODXzVqxMQsZpsOOPJXkTNLfuMUR / ha2IlGAjp6Ck32MZTAkhzrawvP86FAaAwCi0CK5FAisSAwnMBXQ4s8o8ReWV23sCAwlECq5FDScJt3qK5BY1IlB28U0peGE0iRHD8YToUGIRAE3gyPvesIy3q9gciCwJAC / w6tsiTBXhnd7WJBYEgB62eqSI4hw0 + jjgT2Or11PSPHkS6vdS1wduR4oevWU3kEDgTOXnPobhcLAkMK / DO0yjqF2ipHcgzZLWiUBN4Ij61Ob11H
 
     def parse_data(self, msg):
         v = ord(msg[1]) & 0x7f
@@ -97,8 +92,7 @@ Sec-WebSocket-Accept: %s\r\n\r\n' % token)
 
     def parse_headers(self, msg):
         headers = {}
-        print 'header msg-->'
-        print msg
+        # print msg
         header, data = msg.split('\r\n\r\n', 1)
         for line in header.split('\r\n')[1:]:
             key, value = line.split(': ', 1)
@@ -123,11 +117,11 @@ class websocket_server(threading.Thread):
         sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         sock.bind((self.host, self.port))
         sock.listen(5)
-        print 'websocket success '
+        print 'websocket ready success '
         while True:
             connection, address = sock.accept()
             try:
-                username = "ID" + str(address[1])
+                username = str(address[1])
                 thread = websocket_thread(connection, username)
                 thread.start()
                 print 'usr',username

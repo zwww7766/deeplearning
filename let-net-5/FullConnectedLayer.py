@@ -1,8 +1,8 @@
-# coding=utf-8
+# -*- coding: utf-8 -*-
 # 全连接层实现类
 import  numpy as np
 from activators import SigmoidActivator
-
+import copy
 class FullConnectedLayer(object):
         def __init__(self, output_size, input_size):
             """
@@ -15,40 +15,38 @@ class FullConnectedLayer(object):
             self.output_size = output_size
             self.activator = SigmoidActivator()
             # 权重数组W
-            self.W = np.random.uniform(-0.5, 0.5,
+            Fi = input_size+1
+            self.W = np.random.uniform(-2.4/Fi, 2.4/Fi,
                                        (output_size, input_size))
             # 偏置项b-
             self.b = np.zeros((output_size, 1))
             # 输出向量
-            self.output = np.zeros((output_size, 1))
+            self.output_array = np.zeros((output_size, 1))
 
         def forward(self, input_array):
             """前向计算
             input_array: 输入向量，维度必须等于input_size
             """
-            # 式2
-            # print np.shape(self.W)
-            # print input_array
-            a = []
-            if input_array.ndim==3:
-                for i in input_array:
-                    a.append(i[0][0])
-                input_array = a
-            self.input_array = sample = np.array(input_array).reshape(len(input_array), 1)
+            #  式2
+            self.input_array = input_array.reshape([input_array.shape[0] * input_array.shape[1] * input_array.shape[2]])
+            self.input_array = np.array(input_array).reshape(len(input_array), 1)
             self.output_array = self.activator.forward(
                 np.dot(self.W, self.input_array) + self.b)
-            # print '---------->out'
 
         def backward(self, input_array, delta_array, learn_rate):
             """反向计算W和b的梯度
             delta_array: 从上一层传递过来的误差项
             """
             # 式8
-            self.delta_array = self.activator.backward(self.input_array) * np.dot(
+            self.delta_array = None
+            delta_array = delta_array.reshape([84,1])
+            errm = self.output_array * delta_array
+            self.delta_array =np.dot( errm.reshape((84,)), self.W).reshape((120,1))
 
-            self.W.T, delta_array)
-            self.W_grad = np.dot(delta_array, self.input_array.T)
+
+            self.W_grad = np.dot(errm, self.input_array.T)
             self.b_grad = delta_array
+            self.update(learn_rate)
 
 
         def update(self, learning_rate):

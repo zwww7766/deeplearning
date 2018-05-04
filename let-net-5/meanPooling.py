@@ -41,12 +41,12 @@ class meanPoolingLayer(Layer):
                                   self.stride)))
 
     def backward(self, input_array, sensitivity_array, t = []):
-        self.delta_array = np.zeros(self.input_array.shape)
+        self.delta_array = np.zeros(input_array.shape)
         for d in range(self.channel_number):
             for i in range(self.output_height):
                 for j in range(self.output_width):
                     patch_array = get_patch(
-                        self.input_array[d], i, j,
+                        input_array[d], i, j,
                         self.filter_width,
                         self.filter_height,
                         self.stride)

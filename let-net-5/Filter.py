@@ -1,10 +1,12 @@
+# -*- coding: utf-8 -*-
 import numpy as np
-
+import copy
 
 class Filter(object):
     def __init__(self, type):
-        self.weights = np.random.uniform(-1e-4, 1e-4, type)
-        self.bias = 0
+        Fi = type[0] * type[1] + 1
+        self.weights = np.random.uniform(-2.4/Fi, 2.4/Fi, type)
+        self.bias = np.random.uniform(-2.4/Fi, 2.4/Fi)
         self.weights_grad = np.zeros(
             self.weights.shape)
         self.bias_grad = 0
@@ -20,6 +22,8 @@ class Filter(object):
         return self.bias
 
     def update(self, learning_rate):
+        # print '-------+++--------learnrate:%s weightgrad:%s'%(learning_rate, self.weights_grad[0][0])
         self.weights -= learning_rate * self.weights_grad
         self.bias -= learning_rate * self.bias_grad
+        # print self.weights[0][0]
 

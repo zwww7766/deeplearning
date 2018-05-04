@@ -32,7 +32,7 @@ class ShowProcess():
         sys.stdout.write(process_bar) #这两句打印字符到终端
         sys.stdout.flush()
 
-    def close(self, words='done'):
+    def close(self, words='epoch once'):
         print ''
         print words
         self.i = 0

@@ -32,8 +32,6 @@ class FullConnectedLayer(object):
             self.output = self.activator.forward(
                 np.dot(self.W, input_array) + self.b)
 
-            # print np.shape(self.output)
-            # print '---------->out'
 
         def backward(self, delta_array):
             """反向计算W和b的梯度

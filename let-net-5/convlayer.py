@@ -15,7 +15,7 @@ class ConvLayer(Layer):
         else:
             self.c3type = False
 
-        # channel_number 是 每个人filter的深度 而不是 filter的数量
+        # channel_number 是 每个 filter的深度 而不是 filter的数量
         self.output_height = np.shape(self.output_array)[1]
         self.output_width = np.shape(self.output_array)[2]
         self.zero_padding = 0
@@ -23,7 +23,7 @@ class ConvLayer(Layer):
 
         self.filters = []
         self.bias = []
-        self.activator = IdentityActivator()
+        self.activator = ReluActivator()
 
         for filter in filters:
             self.filters.append(Filter.Filter(filter))
@@ -63,16 +63,26 @@ class ConvLayer(Layer):
 
 
     def backward(self, input_array, sensitivity_array,
-                 activator):
+                 learn_rate):
         """
         计算传递给前一层的误差项，以及计算每个权重的梯度
         前一层的误差项保存在self.delta_array
         梯度保存在Filter对象的weights_grad
         """
-        # self.forward(input_array)
+        self.delta_array = None
+
         self.bp_sensitivity_map(sensitivity_array,
                                 self.activator)
         self.bp_gradient(sensitivity_array)
+
+        self.update(learn_rate)
+
+    def update(self, learn_rate):
+        '''
+        按照梯度下降，更新权重
+        '''
+        for filter in self.filters:
+            filter.update(learn_rate)
 
     def bp_sensitivity_map(self, sensitivity_array,
                            activator):
@@ -175,5 +185,5 @@ class ConvLayer(Layer):
         return vmax
     def deltaCalculate(self, delta):
         # 对c3 层做的特殊处理，由于 偏差项 为6，14，14 而卷集合的尺寸 有 （3，14，14）（4，14，14）（6，14，14）
-        # 由于尺寸不同不能直接相加 我将 偏差项的 相应部分相加， 达到目标
+        # 由于尺寸不同不能直接相加 我将偏差项的相应部分相加， 达到目标
         self.delta_array[:np.shape(delta)[0]] +=delta
