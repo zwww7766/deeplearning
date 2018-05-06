@@ -42,18 +42,14 @@ class ConvNetwork(object):
 
     def forward(self, sample):
         output = sample
-        count =0
         for layer in self.layers:
             layer.forward(output)
             output = layer.output_array
-            print '------',count
-            count +=1
-            print output
 
 
         return output
 
-    def backword(self, sample, label, learn_rate):
+    def backward(self, sample, label, learn_rate):
         #
         # label = np.array(label).reshape(len(label), 1)#10,1 与 偏差项统一
         # # np.where 三元操作符
@@ -67,7 +63,6 @@ class ConvNetwork(object):
         #     layer.backward(output, output_label, learn_rate)
         #     output_label = layer.delta_array
         #     output = layer.output_array
-
 
 
         label = np.array(label).reshape(len(label), 1)#10,1 与 偏差项统一
@@ -117,7 +112,7 @@ class ConvNetwork(object):
         res = self.forward(sample)
         # 32 x 32
 
-        self.backword(sample, label, rate)
+        self.backward(sample, label, rate)
     def getFilter(self,layer):
         a = []
         b = []

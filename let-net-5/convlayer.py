@@ -1,9 +1,10 @@
 # -*- coding: UTF-8 -*-
-from layer import Layer
 import numpy as np
-import Filter
-from activators import ReluActivator,IdentityActivator
 from func import *
+
+import Filter
+from activators import ReluActivator
+from layer import Layer
 
 
 class ConvLayer(Layer):
@@ -119,12 +120,6 @@ class ConvLayer(Layer):
             cur = f
             if self.c3type:
                 pass
-                # cur = self.c3[f]
-                # print '------ c3 特殊 ------'
-                # print '被卷积的 &(误差项) 部分：',np.shape(padded_array[cur])
-                # print np.shape(flipped_weights)
-                # print '匹配的delta 深度: ',np.shape(flipped_weights)[0]
-                # print 'delta_array:',np.shape(delta_array)
             for d in range(delta_array.shape[0]):
                 # 从 0 开始到 filter 的个数次
                 # 将 此filter 每一层卷积 第 f 个 sensitivity_array

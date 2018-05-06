@@ -1,7 +1,8 @@
 # -*- coding: UTF-8 -*-
-import layer
 import numpy as np
 from func import *
+
+import layer
 
 """
 下采样 pooling layer

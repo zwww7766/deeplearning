@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import struct
-from PIL import Image
+
 # from bp import *
-from datetime import datetime
 # 数据加载器基类
-import  numpy as np
+import numpy as np
+from PIL import Image
 from func import *
-import os
+import copy
 
 class Loader(object):
     def __init__(self, path, count):
@@ -44,33 +44,38 @@ class Loader(object):
 
 class ImageLoader(Loader):
     def get_picture(self, content, index):
-        self.load_progress()
+
         '''
         内部函数，从文件中获取图像
         '''
-        #从0开始
         start = index * 28 * 28 + 16
         picture = []
-        # pic_b = ''
         for i in range(28):
             picture.append([])
             for j in range(28):
                 picture[i].append(
-                    # 按行i  j值逐步取单个字节
                     self.to_int(content[start + i * 28 + j]))
+        # picture = padding(np.array(picture),2)
+        picture = self.mix_pic(picture)
         return picture
-
-    def get_one_sample(self, picture):
-        """
-        内部函数，将图像转化为样本的输入向量
-        """
-        sample = []
+    def mix_pic(self, pic):
+        mixp = list(np.ones((32, 32)) * -0.1)
         for i in range(28):
             for j in range(28):
-                sample.append(picture[i][j])
-        # 单个样本节点数784 已计算
-        return sample
+                if pic[i][j] > 0:
+                    mixp[i+2][j+2] = 1.175
 
+        return np.array(mixp)
+    # def get_one_sample(self, picture, index):
+    #     """
+    #     内部函数，将图像转化为样本的输入向量
+    #     """
+    #     sample = []
+    #     for i in range(28):
+    #         for j in range(28):
+    #             sample.append(picture[i][j])
+    #     print sample
+    #     return sample
     def load(self):
         """
         加载数据文件，获得全部样本的输入向量
@@ -78,11 +83,7 @@ class ImageLoader(Loader):
         content = self.get_file_content()
         data_set = []
         for index in range(self.count):
-            data_set.append(
-                # self.get_one_sample(
-                # 外padding两层，用来帮助收集图像边缘特征
-                    padding(np.array(self.get_picture(content, index)), 2))
-            # )
+            data_set.append(self.get_picture(content, index))
         return data_set
 # 标签数据加载器
 
@@ -117,8 +118,8 @@ def get_training_data_set():
     """
     获得训练数据集
     """
-    image_loader = ImageLoader('./deeplearning/traindata/train-images-idx3-ubyte', 100)
-    label_loader = LabelLoader('./deeplearning/traindata/train-labels-idx1-ubyte', 100)
+    image_loader = ImageLoader('./deeplearning/traindata/train-images-idx3-ubyte', 400)
+    label_loader = LabelLoader('./deeplearning/traindata/train-labels-idx1-ubyte', 400)
     # image_loader = ImageLoader('./MyMachineLearning/traindata/train-images-idx3-ubyte', 60000)
     # label_loader = LabelLoader('./MyMachineLearning/traindata/train-labels-idx1-ubyte', 60000)
     return image_loader.load(), label_loader.load()
@@ -129,8 +130,8 @@ def get_test_data_set():
     """
     获得测试数据集
     """
-    image_loader = ImageLoader('./deeplearning/traindata/t10k-images-idx3-ubyte', 100)
-    label_loader = LabelLoader('./deeplearning/traindata/t10k-labels-idx1-ubyte', 100)
+    image_loader = ImageLoader('./deeplearning/traindata/t10k-images-idx3-ubyte', 400)
+    label_loader = LabelLoader('./deeplearning/traindata/t10k-labels-idx1-ubyte', 400)
     # image_loader = ImageLoader('./MyMachineLearning/traindata/t10k-images-idx3-ubyte', 10000)
     # label_loader = LabelLoader('./MyMachineLearning/traindata/t10k-labels-idx1-ubyte', 10000)
     return image_loader.load(), label_loader.load()

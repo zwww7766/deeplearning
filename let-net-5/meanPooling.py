@@ -1,8 +1,10 @@
 # -*- coding: UTF-8 -*-
-from layer import Layer
 import numpy as np
-import Filter
 from func import *
+
+import Filter
+from layer import Layer
+
 
 class meanPoolingLayer(Layer):
     def __init__(self, sizes, filters):
