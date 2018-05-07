@@ -29,8 +29,9 @@ def ExecuteClientMsg(v):
     data = v[1].split(':',1)[1]
     uuid = v[0]
     if(k == 'd2q32r2weq23'):
-        result = predict(train_covnet,int(data))
-        print result
+        print 'tarn key:',data
+        result,label = predict(train_covnet,int(data))
+        print '%s-:-%s'%(result,str(label))
         Msgtoclient(uuid,k+':'+str(result))
     elif(k == 'dfdsjjfds'):
         Msgtoclient(uuid, k +":"+ c.config['status'])

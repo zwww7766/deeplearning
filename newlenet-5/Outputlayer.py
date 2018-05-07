@@ -13,8 +13,9 @@ class OutputLayer(FullconnectedLayer):
 
     def forward(self, input):
         self.input_array = input.reshape([input.shape[0] * input.shape[1] * input.shape[2]])
+        # 同尺寸矩阵相乘
         output = np.matmul(self.weight, self.input_array)
-        max_ineach = max(output)
+        max_ineach = np.max(output)
         output = np.exp(output - max_ineach)
         output = output / np.sum(output)
         self.output[0][0] = output

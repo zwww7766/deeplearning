@@ -40,7 +40,11 @@ class ConvLayer(Layer):
                 self.output[index][i][j] = 1.7159 * (val-1) /(val+1)
 
     def forward(self, input_array, c3 = []):
-        """forward运算"""
+        """forward运算
+        使用 tanh(x) 作为激活函数
+        tanh(x) = (e^2x -1) / (e^2x +1)
+        f(a) = A * tanh(S*a)  A = 1.7159 ,S = 2/3
+        """
         for i in range(len(self.output)):
             if not  c3:
                 self.cov_op(input_array, i)

@@ -109,11 +109,17 @@ def predict(train_covnet, p):
     label_index = 0
     magic, numImages, numRows, numColumns = struct.unpack_from('>IIII', test_im, im_index)
     magic, numLabels = struct.unpack_from('>II', test_label, label_index)
-    print('test_set:', numImages)
+    print('train_set:', numImages)
     im_index += struct.calcsize('>IIII')
     label_index += struct.calcsize('>II')
 
-    im = struct.unpack_from('>784B', test_im, p)
+    for i in range(p):
+        im_index += struct.calcsize('>784B')
+        label_index += struct.calcsize('>1B')
+
+
+    im = struct.unpack_from('>784B', test_im, im_index)
+    label = struct.unpack_from('>1B', test_label, label_index)
     im_index += struct.calcsize('>784B')
     label_index += struct.calcsize('>1B')
     im = array(im)
@@ -124,15 +130,6 @@ def predict(train_covnet, p):
             if im[i][j] > 0:
                 bigim[i + 2][j + 2] = 1.175
     im = array([bigim])
+    label = label[0]
     train_covnet.forward(im)
-    return argmax(train_covnet.outputlay7.output[0][0])
-
-log_timeflag = time.time()
-train_covnet = ConvNet()
-# Creat a folder name 'log' to save the history
-# train_covnet.print_netweight('log/origin_weight' + str(log_timeflag) + '.log')
-train_net(train_covnet,  1, [0.0001, 0.0001], 2000)
-# train_covnet.print_netweight('log/trained_weight' + str(log_timeflag) + '.log')
-test_net(train_covnet,  1000)
-# logfile.write('\n')
-# logfile.close()
+    return argmax(train_covnet.outputlay7.output[0][0]),label

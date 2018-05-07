@@ -32,7 +32,6 @@ class ConvNetwork(object):
 
     def showImg(self, array, p, cur):
         """卷积过程可视化，需要使用 unconv,unpooling 继续学习"""
-        print  "layer: %i",cur
         array = np.array(array, dtype='Int32')
         pic = Image.fromarray(array)
         file_name = './deeplearning/traindata/pic/train/image%s.png' % (p+""+cur)
